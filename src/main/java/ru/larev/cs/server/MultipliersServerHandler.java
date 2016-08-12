@@ -11,7 +11,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  */
 @ChannelHandler.Sharable
 public class MultipliersServerHandler extends ChannelInboundHandlerAdapter {
-    private void multipliers(int n,ByteBuf buffer) {
+    private void multipliers(int n, ByteBuf buffer) {
 
         if (n <= 1)
             return;
@@ -21,7 +21,7 @@ public class MultipliersServerHandler extends ChannelInboundHandlerAdapter {
 
                 if (n > 1) {
                     buffer.writeInt(i);
-                    multipliers(n,buffer);
+                    multipliers(n, buffer);
                     return;
                 } else {
                     buffer.writeInt(i);
@@ -36,7 +36,7 @@ public class MultipliersServerHandler extends ChannelInboundHandlerAdapter {
         ByteBuf bb = (ByteBuf) msg;
         int i = bb.readInt();
         ByteBuf buffer = ctx.alloc().buffer();
-        multipliers(i,buffer);
+        multipliers(i, buffer);
         ctx.writeAndFlush(buffer);
     }
 
